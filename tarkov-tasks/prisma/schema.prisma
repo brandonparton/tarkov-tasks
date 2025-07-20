@@ -1,0 +1,25 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  level     Int?     
+  progress  QuestProgress[]
+  createdAt DateTime @default(now())
+}
+
+model QuestProgress {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  questId     String
+  completedAt DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+}

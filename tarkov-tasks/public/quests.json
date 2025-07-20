@@ -1,0 +1,16 @@
+[
+  {
+    "id": "quest_debut",
+    "name": "Debut",
+    "level": 1,
+    "trader": "Prapor",
+    "requirements": []
+  },
+  {
+    "id": "quest_seek_supply",
+    "name": "Seek and Destroy",
+    "level": 5,
+    "trader": "Therapist",
+    "requirements": []
+  }
+]

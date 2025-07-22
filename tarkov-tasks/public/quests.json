@@ -4,13 +4,29 @@
     "name": "Debut",
     "level": 1,
     "trader": "Prapor",
-    "requirements": []
+    "requirements": [],
+    "objectives": [
+      {
+        "id": "obj_1",
+        "type": "TaskObjectiveBasic",
+        "description": "Mark the first trading post on Shoreline",
+        "maps": [{ "id": "shoreline", "name": "Shoreline" }]
+      }
+    ]
   },
   {
     "id": "quest_seek_supply",
     "name": "Seek and Destroy",
     "level": 5,
     "trader": "Therapist",
-    "requirements": []
+    "requirements": [],
+    "objectives": [
+      {
+        "id": "obj_2",
+        "type": "TaskObjectiveBasic",
+        "description": "Eliminate 5 Scavs on Woods",
+        "maps": [{ "id": "woods", "name": "Woods" }]
+      }
+    ]
   }
 ]

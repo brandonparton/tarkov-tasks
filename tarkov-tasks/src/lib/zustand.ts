@@ -1,23 +1,47 @@
-// src/lib/zustand.ts
+// File: lib/zustand.ts
 import { create } from "zustand";
 
-type Trader = string | null;
+export interface Quest {
+  id: string;
+  name: string;
+  level: number;
+  trader: string;
+  requirements: { id: string }[];
+  traderRequirements: { id: string }[]; // ✅ ADD THIS LINE
+  kappaRequired: boolean;
+  objectives: {
+    id: string;
+    type: string;
+    description: string;
+    count?: number;
+    maps: { id: string; name: string }[];
+    itemCount?: number;
+    itemName?: string;
+    iconUrl?: string;
+  }[];
+}
 
 interface QuestStore {
-  /** The user’s PMC level (default to 1) */
+  // PMC level
   level: number;
-  /** Currently selected trader to filter by, or null for “all traders” */
-  traderFilter: Trader;
+  setLevel: (n: number) => void;
 
-  /** Set a new PMC level */
-  setLevel: (level: number) => void;
-  /** Set or clear the trader filter */
-  setTraderFilter: (trader: Trader) => void;
+  // Trader filter
+  traderFilter: string | null;
+  setTraderFilter: (t: string | null) => void;
+
+  // All quests loaded from API
+  allQuests: Quest[];
+  setAllQuests: (qs: Quest[]) => void;
 }
 
 export const useQuestStore = create<QuestStore>((set) => ({
   level: 1,
+  setLevel: (n) => set({ level: n }),
+
   traderFilter: null,
-  setLevel: (level) => set({ level }),
-  setTraderFilter: (traderFilter) => set({ traderFilter }),
+  setTraderFilter: (t) => set({ traderFilter: t }),
+
+  allQuests: [],
+  setAllQuests: (qs) => set({ allQuests: qs }),
 }));

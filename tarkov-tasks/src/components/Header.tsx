@@ -10,7 +10,10 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ onMenuClick }) => (
-  <header className="flex items-center justify-between w-full bg-black/60 px-6 py-3 backdrop-blur-md border-b border-gray-700">
+  <header
+    className="relative z-50 flex items-center justify-between w-full
+               bg-black/60 px-6 py-3 backdrop-blur-md border-b border-gray-700"
+  >
     <div className="flex items-center gap-4">
       <button
         onClick={onMenuClick}
@@ -19,12 +22,8 @@ const Header: FC<HeaderProps> = ({ onMenuClick }) => (
       >
         <Bars3Icon className="h-6 w-6 text-[#8FAF4F] hover:text-[#C0D96F]" />
       </button>
-      <h1 className="text-2xl font-semibold text-[#C0D96F]">
-        TarkovTasks
-      </h1>
     </div>
-    <div className="flex items-center gap-6">
-      <BellIcon className="h-6 w-6 text-gray-300 hover:text-white transition-colors" />
+    <div className="flex items-centery gap-4">
       <ProfileMenu />
     </div>
   </header>

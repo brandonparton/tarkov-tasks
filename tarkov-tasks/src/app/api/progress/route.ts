@@ -37,3 +37,29 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Already completed?" }, { status: 400 });
   }
 }
+
+export async function DELETE(req: Request) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  const { questId } = await req.json();
+  if (!questId || typeof questId !== "string") {
+    return NextResponse.json({ error: "Invalid questId" }, { status: 400 });
+  }
+  try {
+    const result = await prisma.questProgress.deleteMany({
+      where: {
+        userId: session.user.id,
+        questId: questId,
+      },
+    });
+    if (result.count === 0) {
+      return NextResponse.json({ error: "Quest not found" }, { status: 404 });
+    }
+    return NextResponse.json({ success: true }, { status: 200 });
+  } catch (e) {
+    console.error(e);
+    return NextResponse.json({ error: "Failed to delete" }, { status: 500 });
+  }
+}
